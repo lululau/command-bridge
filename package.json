@@ -2,7 +2,7 @@
   "name": "command-bridge",
   "displayName": "Command Bridge",
   "description": "Execute custom commands and scripts",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "liuxiang921",
   "repository": {
     "type": "git",
