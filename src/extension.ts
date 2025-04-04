@@ -142,6 +142,15 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	});
 	context.subscriptions.push(open_file_disposable);
+
+	vscode.window.onDidCloseTerminal((event) => {
+		const terminal = event;
+		const terminalLocation = terminal.creationOptions.location;
+		if (terminalLocation === vscode.TerminalLocation.Editor) {
+			// active first editor group
+			vscode.commands.executeCommand("workbench.action.focusFirstEditorGroup");
+		}
+	});
 }
 
 // This method is called when your extension is deactivated
