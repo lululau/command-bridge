@@ -58,6 +58,18 @@ Copies specified text to clipboard.
 }
 ```
 
+#### `command-bridge.remember`
+Stores text in memory for later use with the {memory} placeholder.
+```json
+{
+    "command": "command-bridge.remember",
+    "args": {
+        "namespace": "myKey",
+        "text": "Value to remember"
+    }
+}
+```
+
 #### `command-bridge.openFile`
 Opens one or multiple files in the editor. Supports both absolute and relative paths. The `~` symbol can be used to represent the home directory.
 ```json
@@ -76,6 +88,7 @@ Opens one or multiple files in the editor. Supports both absolute and relative p
 
 The following placeholders can be used in command arguments:
 
+- `{memory:namespace}`: Retrieves previously stored text using command-bridge.remember
 - `{userHome}`: User's home directory
 - `{workspaceFolder}`: Current workspace folder path
 - `{workspaceFolderBasename}`: Name of the workspace folder
