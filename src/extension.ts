@@ -5,6 +5,8 @@ import os from 'os';
 import * as vscode from 'vscode';
 import * as child from "child_process";
 
+const MEMORY_STORE: { [key: string]: string } = {};
+
 function expandTilde(filePath: string | vscode.Uri | undefined | null): string | vscode.Uri | undefined | null {
 	if (typeof filePath !== 'string') {
 		return filePath || undefined;
@@ -25,6 +27,7 @@ function processTextPlaceholders(text: string | vscode.Uri | undefined | null, e
 	}
 
 	return text
+		.replace(/\{memory:(.*)\}/g, (match, p1) => { return MEMORY_STORE[p1] || ""; })
 		.replace("{userHome}", os.homedir())
 		.replace("{workspaceFolder}", vscode.workspace.rootPath || '')
 		.replace("{workspaceFolderBasename}", path.basename(vscode.workspace.rootPath || ''))
@@ -142,6 +145,14 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	});
 	context.subscriptions.push(open_file_disposable);
+
+	const remember_disposable = vscode.commands.registerCommand("command-bridge.remember", async (args: { namespace: string, text: string}) => {
+		const editor = vscode.window.activeTextEditor;
+		const namespace = processTextPlaceholders(args.namespace, editor) as string;
+		const text = processTextPlaceholders(args.text, editor) as string;
+		MEMORY_STORE[namespace] = text;
+	});
+	context.subscriptions.push(remember_disposable);
 
 	vscode.window.onDidCloseTerminal((event) => {
 		const terminal = event;

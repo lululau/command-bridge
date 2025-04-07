@@ -2,7 +2,7 @@
   "name": "command-bridge",
   "displayName": "Command Bridge",
   "description": "Execute custom commands and scripts",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "liuxiang921",
   "repository": {
     "type": "git",
@@ -33,6 +33,10 @@
       {
         "command": "command-bridge.openFile",
         "title": "Open File"
+      },
+      {
+        "command": "command-bridge.remember",
+        "title": "Remember"
       }
     ]
   },
