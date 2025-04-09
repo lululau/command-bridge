@@ -101,6 +101,7 @@ The following placeholders can be used in command arguments:
 - `{lineNumber}`: Current line number
 - `{columnNumber}`: Current column number
 - `{selection}`: Currently selected text
+- `{selectionOrWord}`: Currently selected text, or word at cursor position if no text is selected
 - `{word}`: Word at current cursor position
 
 ## Requirements

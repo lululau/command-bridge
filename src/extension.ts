@@ -40,6 +40,7 @@ function processTextPlaceholders(text: string | vscode.Uri | undefined | null, e
 		.replace("{lineNumber}", `${(editor?.selection.active.line || 0) + 1}`)
 		.replace("{columnNumber}", `${(editor?.selection.active.character || 0) + 1}`)
 		.replace("{selection}", editor?.document.getText(editor?.selection || new vscode.Selection(0, 0, 0, 0)) || '')
+		.replace("{selectionOrWord}", (editor?.selection.isEmpty ? currentWord : editor?.document.getText(editor?.selection)) || currentWord || '')
 		.replace("{selectionStart}", `${(editor?.selection.start.line || 0) + 1}:${(editor?.selection.start.character || 0) + 1}`)
 		.replace("{selectionEnd}", `${(editor?.selection.end.line || 0) + 1}:${(editor?.selection.end.character || 0) + 1}`)
 		.replace("{selectionStartLine}", `${(editor?.selection.start.line || 0) + 1}`)
